@@ -5,7 +5,7 @@ This is a TheEggBackend supposed to hold all endpoint for the egg prototype.
 
 ## Set up db 
 
-Udes this video for reference https://www.youtube.com/watch?v=FwMwO8pXfq0
+Used this video for reference https://www.youtube.com/watch?v=FwMwO8pXfq0
 
 decided to do a local mongodb server so i can see and manipulate a little more easier.
 

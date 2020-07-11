@@ -6,21 +6,18 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config') //node env from production or development
 const bodyParser = require("body-parser");
 const app = express();
-
+const authRouter=require('./routes/auth.routes');
+const usersRouter = require('./routes/user.routes');
 const morganOption = NODE_ENV === 'production'
   ? 'tiny'
   : 'common';
-
-app.use(morgan(morganOption));//HTTP request logger middleware for node.js
-app.use(cors()); // cross orrigin 
-app.use(helmet());//Helmet helps you secure your Express apps by setting various HTTP headers. 
-app.use(bodyParser.json());
-//const authRouter=require('./app/routes/auth.routes');
-//const userRouter=require('./app/routes/user.routes');
 const db = require("./models/index");
 const dbConfig= require("./config/db.config")
 
+
+//db
 const Role = db.role;
+
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -34,19 +31,21 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
-  require('./routes/auth.routes')(app);
-  require('./routes/user.routes')(app);
   
 
 
 
+//app using all set variables
+app.use(morgan(morganOption));//HTTP request logger middleware for node.js
+app.use(cors()); // cross orrigin 
+app.use(helmet());//Helmet helps you secure your Express apps by setting various HTTP headers. 
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!')
-})
+//Routes
+app.use('/api/test', usersRouter);
+app.use('/api/auth', authRouter);
 
-
+//error handler
 app.use(function errorHandler(error, req, res, next) {
    let response
    if (NODE_ENV === 'production') {
@@ -58,6 +57,7 @@ app.use(function errorHandler(error, req, res, next) {
    res.status(500).json(response)
 })
 
+//first instance of db
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
