@@ -37,7 +37,7 @@ db.mongoose
 
 //app using all set variables
 app.use(morgan(morganOption));//HTTP request logger middleware for node.js
-app.use(cors()); // cross orrigin 
+app.use(cors()); // cross origin 
 app.use(helmet());//Helmet helps you secure your Express apps by setting various HTTP headers. 
 app.use(bodyParser.json());
 
@@ -85,7 +85,6 @@ function initial() {
         if (err) {
           console.log("error", err);
         }
-
         console.log("added 'admin' to roles collection");
       });
     }
