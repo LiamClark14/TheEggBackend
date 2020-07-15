@@ -1,24 +1,24 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var UserSchema = new Schema({
+var userSchema = new Schema({
   firstName: {
     type: String,
     required: true
   },
-  lastName:{
-    type:String,
-    required:true
+  lastName: {
+    type: String,
+    required: true
   },
-  email:{
-    type:String,
-    required:true
+  email: {
+    type: String,
+    required: true
   },
   password: {
     type: String,
     required: true
   },
-  feedBack:{
-    type:String,
+  feedBack: {
+    type: String,
   },
   roles: [
     {
@@ -26,11 +26,11 @@ var UserSchema = new Schema({
       ref: "Role"
     }
   ]
-},{
+}, {
   timestamps: true,
 });
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;
 /*education: {
@@ -49,4 +49,4 @@ module.exports = User;
   skills: {
     type: Array
   }
-*/ 
+*/

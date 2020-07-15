@@ -6,13 +6,13 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config') //node env from production or development
 const bodyParser = require("body-parser");
 const app = express();
-const authRouter=require('./routes/auth.routes');
+const authRouter = require('./routes/auth.routes');
 const usersRouter = require('./routes/user.routes');
 const morganOption = NODE_ENV === 'production'
   ? 'tiny'
   : 'common';
 const db = require("./models/index");
-const dbConfig= require("./config/db.config")
+const dbConfig = require("./config/db.config")
 
 
 //db
@@ -31,7 +31,7 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-  
+
 
 
 
@@ -47,14 +47,14 @@ app.use('/api/auth', authRouter);
 
 //error handler
 app.use(function errorHandler(error, req, res, next) {
-   let response
-   if (NODE_ENV === 'production') {
-     response = { error: { message: 'server error' } }
-   } else {
-     console.error(error)
-     response = { message: error.message, error }
-   }
-   res.status(500).json(response)
+  let response
+  if (NODE_ENV === 'production') {
+    response = { error: { message: 'server error' } }
+  } else {
+    console.error(error)
+    response = { message: error.message, error }
+  }
+  res.status(500).json(response)
 })
 
 //first instance of db
@@ -94,4 +94,4 @@ function initial() {
 
 
 
-module.exports = app
+module.exports = app;
