@@ -2,6 +2,8 @@ const express = require('express')
 const { authJwt } = require("../middleware/index");
 const controller = require("../controller/user.controller");
 
+const units =require("../controller/units.controller")
+
 const usersRouter = express.Router()
 
 usersRouter.all(function(req, res, next) {
@@ -14,8 +16,15 @@ usersRouter.all(function(req, res, next) {
 
 usersRouter.get('/all',controller.allAccess)
 usersRouter.get("/user", authJwt.verifyToken, controller.userBoard);
-usersRouter.get("/mod",authJwt.verifyToken, authJwt.isModerator,controller.moderatorBoard);
-usersRouter.get("/admin",authJwt.verifyToken, authJwt.isAdmin,controller.adminBoard);
+//usersRouter.get("/mod",authJwt.verifyToken, authJwt.isModerator,controller.moderatorBoard);
+//usersRouter.get("/admin",authJwt.verifyToken, authJwt.isAdmin,controller.adminBoard);
+
+
+
+
+
+
+
 
 
 module.exports = usersRouter;

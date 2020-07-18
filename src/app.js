@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const authRouter = require('./routes/auth.routes');
 const usersRouter = require('./routes/user.routes');
+const unitsRouter =require('./routes/units.routes')
 const morganOption = NODE_ENV === 'production'
   ? 'tiny'
   : 'common';
@@ -31,10 +32,6 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
-
-
-
 //app using all set variables
 app.use(morgan(morganOption));//HTTP request logger middleware for node.js
 app.use(cors()); // cross origin 
@@ -44,6 +41,9 @@ app.use(bodyParser.json());
 //Routes
 app.use('/api/test', usersRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/unit', authRouter);
+
+
 
 //error handler
 app.use(function errorHandler(error, req, res, next) {
@@ -89,6 +89,10 @@ function initial() {
       });
     }
   });
+
+
+
+  
 }
 
 

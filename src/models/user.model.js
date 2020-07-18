@@ -25,7 +25,10 @@ var userSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role"
     }
-  ]
+  ],
+  progress:{
+    type: mongoose.Schema.Types.ObjectId, ref: 'Lesson'
+  }
 }, {
   timestamps: true,
 });

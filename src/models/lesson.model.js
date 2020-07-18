@@ -7,7 +7,7 @@ var lessonSchema = new Schema({
     required: true
   },
   minutes: {
-    type: int,
+    type: Number,
     required: true
   },
   videoURL: {
@@ -16,7 +16,7 @@ var lessonSchema = new Schema({
   },
   comments: [
     {
-      type: mongoose.Schema.Types.ObjectId, ref: 'Comment'
+      type: mongoose.Schema.Types.ObjectId, ref: 'Comments'
     }
   ],
   resources: [
@@ -28,4 +28,4 @@ var lessonSchema = new Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Chapter', chapterSchema);
+module.exports = mongoose.model('Lesson', lessonSchema);
