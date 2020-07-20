@@ -9,7 +9,7 @@ db.user = require("./user.model");
 db.role = require("./role.model");
 db.unit = require("./unit.model");
 //db.chapter = require("./chapter.model");
-db.lesson = require("./lesson.model");
+//db.lesson = require("./lesson.model");
 
 db.ROLES = ["user", "admin", "moderator"];
 

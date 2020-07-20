@@ -38,10 +38,12 @@ app.use(cors()); // cross origin
 app.use(helmet());//Helmet helps you secure your Express apps by setting various HTTP headers. 
 app.use(bodyParser.json());
 
+
+
 //Routes
 app.use('/api/test', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/unit', authRouter);
+app.use('/api/unit', unitsRouter);
 
 
 
