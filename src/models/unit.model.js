@@ -26,7 +26,6 @@ var lessonSchema = new Schema({
 }, {
   timestamps: true
 });
-
 var chapterSchema = new Schema({
   chapterName: {
     type: String,
@@ -37,13 +36,14 @@ var chapterSchema = new Schema({
   timestamps: true
 });
 
+
 var unitSchema = new Schema({
   unitName: {
     type: String,
     required: true
   },
   numChapters: {
-    type: Number ,
+    type: Number,
     required: true
   },
   minutes: {
@@ -56,7 +56,13 @@ var unitSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Unit', unitSchema);
-
+const Unit = mongoose.model('Unit', unitSchema);
+const Chapter=mongoose.model('Chapter', chapterSchema);
+const Lesson = mongoose.model('Lesson', chapterSchema);
+module.exports = {
+  Unit:Unit,
+  Chapter:Chapter,
+  Lesson:Lesson,
+}
 
 

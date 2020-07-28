@@ -8,13 +8,20 @@ const bodyParser = require("body-parser");
 const app = express();
 const authRouter = require('./routes/auth.routes');
 const usersRouter = require('./routes/user.routes');
-const unitsRouter =require('./routes/units.routes')
+const unitsRouter =require('./routes/units.routes');
+const chatRouter =require('./routes/chat.routes')
+
 const morganOption = NODE_ENV === 'production'
   ? 'tiny'
   : 'common';
 const db = require("./models/index");
 const dbConfig = require("./config/db.config")
 
+//socket io prac
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+//io.path('/myownpath');
+//app.set('socket.io', io);
 
 //db
 const Role = db.role;
@@ -44,8 +51,30 @@ app.use(bodyParser.json());
 app.use('/api/test', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/unit', unitsRouter);
+//app.use('/api/chat', chatRouter);
+require('./routes/chat.routes')(app,io);
 
 
+//socket
+
+app.get('/', function(req, res){
+  res.send('Hello World!');
+});
+
+// io.on('connection', (socket)=>{
+//   console.log("o")
+//   socket.on('chat message', function(msg){
+//     console.log('message: ' + msg);
+//   });
+// });
+
+
+app.use('*', (req, res) => {
+  return res.status(404).json({
+    success: false,
+    message: 'API endpoint doesnt exist'
+  })
+});
 
 //error handler
 app.use(function errorHandler(error, req, res, next) {
@@ -91,12 +120,7 @@ function initial() {
       });
     }
   });
-
-
-
-  
 }
 
 
-
-module.exports = app;
+module.exports = server;
