@@ -15,7 +15,7 @@ var lessonSchema = new Schema({
   },
   comments: [
     {
-      type: mongoose.Schema.Types.ObjectId, ref: 'Comments'
+      type: mongoose.Schema.Types.ObjectId, ref: 'LessonComments'
     }
   ],
   resources: [
@@ -59,6 +59,7 @@ var unitSchema = new Schema({
 const Unit = mongoose.model('Unit', unitSchema);
 const Chapter=mongoose.model('Chapter', chapterSchema);
 const Lesson = mongoose.model('Lesson', chapterSchema);
+
 module.exports = {
   Unit:Unit,
   Chapter:Chapter,

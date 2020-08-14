@@ -28,7 +28,10 @@ var userSchema = new Schema({
   ],
   progress:{
     type: mongoose.Schema.Types.ObjectId, ref: 'Lesson'
-  }
+  },
+  ChatRooms:[{
+    type: mongoose.Schema.Types.ObjectId, ref: 'ChatRoom'
+  }]
 }, {
   timestamps: true,
 });

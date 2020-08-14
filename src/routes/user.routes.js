@@ -16,6 +16,7 @@ usersRouter.all(function(req, res, next) {
 
 usersRouter.get('/all',controller.allAccess)
 usersRouter.get("/user", authJwt.verifyToken, controller.userBoard);
+
 //usersRouter.get("/mod",authJwt.verifyToken, authJwt.isModerator,controller.moderatorBoard);
 //usersRouter.get("/admin",authJwt.verifyToken, authJwt.isAdmin,controller.adminBoard);
 

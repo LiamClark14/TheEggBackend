@@ -9,7 +9,8 @@ const app = express();
 const authRouter = require('./routes/auth.routes');
 const usersRouter = require('./routes/user.routes');
 const unitsRouter =require('./routes/units.routes');
-const chatRouter =require('./routes/chat.routes')
+const articlesRouter =require('./routes/articles.routes');
+
 
 const morganOption = NODE_ENV === 'production'
   ? 'tiny'
@@ -51,23 +52,17 @@ app.use(bodyParser.json());
 app.use('/api/test', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/unit', unitsRouter);
+app.use('/api/article',articlesRouter);
 //app.use('/api/chat', chatRouter);
 require('./routes/chat.routes')(app,io);
 
-
 //socket
-
-app.get('/', function(req, res){
-  res.send('Hello World!');
-});
-
 // io.on('connection', (socket)=>{
 //   console.log("o")
 //   socket.on('chat message', function(msg){
 //     console.log('message: ' + msg);
 //   });
 // });
-
 
 app.use('*', (req, res) => {
   return res.status(404).json({
@@ -121,6 +116,4 @@ function initial() {
     }
   });
 }
-
-
 module.exports = server;
